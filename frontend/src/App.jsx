@@ -22,12 +22,14 @@ export default function App() {
     });
   };
 
+  const apiBaseUrl = import.meta.env.VITE_API_URL || "http://127.0.0.1:8000";
+
   const predictDropout = async () => {
     setLoading(true);
 
     try {
       const response = await axios.post(
-        "http://127.0.0.1:8001/predict",
+        `${apiBaseUrl}/predict`,
         {
           "Age at enrollment": Number(formData.age),
           "Tuition fees up to date": Number(formData.tuition),
@@ -39,8 +41,8 @@ export default function App() {
 
       setResult(response.data);
     } catch (error) {
-      console.error(error);
-      alert("Backend connection failed.");
+      console.error("Predict request failed:", error);
+      alert("Backend connection failed. Make sure the FastAPI server is running on http://127.0.0.1:8000");
     }
 
     setLoading(false);

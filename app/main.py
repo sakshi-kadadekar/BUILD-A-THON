@@ -5,10 +5,10 @@ import pandas as pd
 
 app = FastAPI()
 
-# CORS for React frontend
+# CORS for React frontend during local development
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173"],
+    allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
